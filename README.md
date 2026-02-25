@@ -19,7 +19,6 @@ The objective was to evaluate how well morphological and color-based features di
 Each image contains objects placed on a uniform background to facilitate segmentation.
 
 
-
 ## Methodology
 
 ### 1. Image Segmentation

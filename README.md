@@ -8,7 +8,6 @@ This project implements a complete computer vision pipeline for multiclass class
 
 The objective was to evaluate how well morphological and color-based features discriminate between visually similar classes and to compare classification performance before and after dimensionality reduction.
 
----
 
 ## Dataset
 
@@ -19,7 +18,7 @@ The objective was to evaluate how well morphological and color-based features di
 
 Each image contains objects placed on a uniform background to facilitate segmentation.
 
----
+
 
 ## Methodology
 
@@ -32,7 +31,7 @@ Two segmentation approaches were explored:
 
 Morphological operations (erosion, dilation, majority filtering) were applied to refine segmentation masks.
 
----
+
 
 ### 2. Feature Extraction
 
@@ -56,14 +55,13 @@ For each segmented object, the following features were extracted:
 
 Total: 12 features per object
 
----
 
 ### 3. Statistical Analysis
 
 - Two-sample t-tests were performed to evaluate discriminative power of individual features.
 - Pairwise comparisons across classes were conducted.
 
----
+
 
 ### 4. Classification – Naive Bayes
 
@@ -73,7 +71,7 @@ Total: 12 features per object
 
 Confusion matrices were generated for performance evaluation.
 
----
+
 
 ### 5. Principal Component Analysis (PCA)
 
@@ -81,7 +79,7 @@ Confusion matrices were generated for performance evaluation.
 - First 3 principal components selected (>90% variance explained)
 - Classification repeated using PCA-transformed features
 
----
+
 
 ## Results
 
@@ -89,7 +87,7 @@ Confusion matrices were generated for performance evaluation.
 - Performance decreased after PCA dimensionality reduction.
 - This suggests that certain individual morphological features carry class-specific discriminative information that may be partially lost through linear projection.
 
----
+
 
 ## Key Insights
 
@@ -97,7 +95,7 @@ Confusion matrices were generated for performance evaluation.
 - Morphological descriptors are highly informative for object classification.
 - PCA is not always beneficial when fine-grained distinctions are required.
 
----
+
 
 ## Technologies Used
 
@@ -105,7 +103,7 @@ Confusion matrices were generated for performance evaluation.
 - Image Processing Toolbox
 - Statistics and Machine Learning Toolbox
 
----
+
 
 ## Future Improvements
 

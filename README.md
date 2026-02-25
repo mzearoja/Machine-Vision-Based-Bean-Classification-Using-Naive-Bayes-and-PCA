@@ -1,112 +1,143 @@
-# Machine-Vision-Based-Bean-Classification-Using-Naive-Bayes-and-PCA
+Computer Vision–Based Multiclass Classification Using Morphological Features, Naive Bayes, and PCA (MATLAB)
+Overview
 
-Computer Vision–Based Multiclass Object Classification Using Morphological Features and Naive Bayes (MATLAB)
+This project implements a complete computer vision and statistical learning pipeline for multiclass object classification using RGB images. The workflow includes:
 
-## Overview
+Image segmentation
 
-This project implements a complete computer vision pipeline for multiclass classification of objects (bean varieties) using RGB images. The workflow includes image segmentation, morphological feature extraction, statistical hypothesis testing, Bayesian classification, and dimensionality reduction via Principal Component Analysis (PCA).
+Morphological and color feature extraction
 
-The objective was to evaluate how well morphological and color-based features discriminate between visually similar classes and to compare classification performance before and after dimensionality reduction.
+Statistical hypothesis testing
 
+Gaussian Naive Bayes classification
 
-## Dataset
+Dimensionality reduction using Principal Component Analysis (PCA)
 
-- 16 RGB images
-- 8 object classes
-- 25 objects per image
-- Total: 400 segmented objects
+The goal was to evaluate the discriminative power of handcrafted morphological features and compare classification performance before and after dimensionality reduction.
 
-Each image contains objects placed on a uniform background to facilitate segmentation.
+Dataset
 
+16 RGB images
 
-## Methodology
+8 object classes
 
-### 1. Image Segmentation
+25 objects per image
 
-Two segmentation approaches were explored:
+Total: 400 segmented objects
 
-- Mahalanobis distance-based color segmentation
-- Automatic thresholding (Otsu method) after RGB normalization
+Objects were imaged against a uniform background to facilitate segmentation.
 
-Morphological operations (erosion, dilation, majority filtering) were applied to refine segmentation masks.
+Methodology
+1. Segmentation Strategies
 
+Two segmentation approaches were implemented and compared:
 
+Method A — Automated Segmentation (Recommended)
 
-### 2. Feature Extraction
+RGB normalization (normr)
 
-For each segmented object, the following features were extracted:
+Color index transformation: gray = r + g − b
 
-**Morphological Features**
-- Area
-- Perimeter
-- Major Axis Length
-- Minor Axis Length
-- Eccentricity
-- Solidity
-- Elongation
-- Aspect Ratio
-- Compactness
-- Roundness
+Otsu thresholding (graythresh)
 
-**Color Features**
-- Hue (HSI color space)
-- Intensity
+Morphological refinement (bwmorph)
 
-Total: 12 features per object
+Connected-component labeling (bwlabel)
 
+This approach is fully reproducible and requires no manual interaction.
 
-### 3. Statistical Analysis
+Method B — ROI-Based Mahalanobis Segmentation
 
-- Two-sample t-tests were performed to evaluate discriminative power of individual features.
-- Pairwise comparisons across classes were conducted.
+Manual background sampling (roipoly)
 
+RGB covariance estimation
 
+Mahalanobis distance–based segmentation
 
-### 4. Classification – Naive Bayes
+Morphological refinement
 
-- 70% of samples used for training
-- 30% used for testing
-- Gaussian Naive Bayes classifier implemented using `fitcnb`
+This method demonstrates color-space statistical segmentation but is semi-supervised.
 
-Confusion matrices were generated for performance evaluation.
+Feature Extraction
 
+For each object, the following features were computed:
 
+Morphological Features
 
-### 5. Principal Component Analysis (PCA)
+Area
 
-- PCA applied to reduce dimensionality
-- First 3 principal components selected (>90% variance explained)
-- Classification repeated using PCA-transformed features
+Perimeter
 
+MajorAxisLength
 
+MinorAxisLength
 
-## Results
+Eccentricity
 
-- Naive Bayes using all 12 features achieved near-perfect classification.
-- Performance decreased after PCA dimensionality reduction.
-- This suggests that certain individual morphological features carry class-specific discriminative information that may be partially lost through linear projection.
+Solidity
 
+Elongation
 
+AspectRatio
 
-## Key Insights
+Compactness
 
-- Careful feature engineering can outperform dimensionality reduction in visually similar object classes.
-- Morphological descriptors are highly informative for object classification.
-- PCA is not always beneficial when fine-grained distinctions are required.
+Roundness
 
+Color Features
 
+Hue (HSI color space)
 
-## Technologies Used
+Intensity
 
-- MATLAB
-- Image Processing Toolbox
-- Statistics and Machine Learning Toolbox
+Total features per object: 12
 
+Classification
 
+70% training / 30% testing split
 
-## Future Improvements
+Gaussian Naive Bayes classifier (fitcnb)
 
-- Implement cross-validation
-- Compare with SVM and Random Forest
-- Automate background detection
-- Extend to hyperspectral data
+Confusion matrix analysis
+
+Principal Component Analysis (PCA)
+
+PCA applied to reduce dimensionality
+
+First 3 principal components selected (>90% variance explained)
+
+Classification repeated using PCA-reduced features
+
+Results
+
+Naive Bayes with full feature set achieved higher classification accuracy.
+
+Accuracy decreased after PCA dimensionality reduction.
+
+This suggests that certain handcrafted morphological features carry highly discriminative class-specific information that may be partially lost under linear projection.
+
+Key Insights
+
+Feature engineering remains powerful for structured image classification problems.
+
+Dimensionality reduction does not always improve classification performance.
+
+Morphological descriptors can effectively discriminate visually similar classes.
+
+Technologies
+
+MATLAB
+
+Image Processing Toolbox
+
+Statistics and Machine Learning Toolbox
+
+Potential Extensions
+
+k-fold cross-validation
+
+Comparison with SVM and Random Forest
+
+Adaptation to biomedical image analysis (e.g., cell morphology, lesion detection)
+
+Integration with deep learning feature extractors
